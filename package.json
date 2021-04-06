@@ -3,10 +3,28 @@
   "version": "0.1.0",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
+    "start": "DEBUG=giftr* nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "MAD9124",
+    "W21",
+    "node",
+    "express",
+    "mongoose",
+    "jwt"
+  ],
+  "contributors": [
+    "Robert McKenney <mckennr@algonquinlive.com>",
+    "Ekta Paras Dudhatra <dudh0004@algonquinlive.com>",
+    "Nikolas Eisenhour <eise0033@algonquinlive.com>",
+    "Stive Avendaño Zambrano <aven0006@algonquinlive.com>"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.12.3",
+    "mongoose-unique-validator": "^2.0.3"
+  }
 }
