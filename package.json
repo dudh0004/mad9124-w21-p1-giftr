@@ -24,6 +24,7 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "mongoose": "^5.12.3",
     "mongoose-unique-validator": "^2.0.3"
   }
