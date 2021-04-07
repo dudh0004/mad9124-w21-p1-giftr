@@ -1,18 +1,23 @@
 import mongoose from 'mongoose';
+import config from 'config';
+import logger from './logger.js';
+
+const log = logger.child({ module: 'connectDB' });
+const dbConf = config.get('db');
 
 export default function () {
   mongoose
-    .connect(`mongodb://localhost:27017/giftr`, {
+    .connect(`mongodb://${dbConf.host}:${dbConf.port}/${dbConf.name}`, {
       useNewUrlParser: true,
       useCreateIndex: true,
       useFindAndModify: false,
-      useUnifiedTopology: true,
+      useUnifiedTopology: true
     })
     .then(() => {
-      console.info('Successfully connected to MongoDB ...');
+      log.info('Successfully connected to MongoDB ...');
     })
     .catch(error => {
-      console.error('Error connecting to MongoDB ... ', error.message);
+      log.error('Error connecting to MongoDB ...', error.message);
       process.exit(1);
     });
-}
+};
