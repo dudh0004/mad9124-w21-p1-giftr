@@ -3,6 +3,8 @@ import createDebug from 'debug'
 import Person from '../models/Person.js'
 import sanitizeBody from '../middleware/sanitizeBody.js'
 import authUser from '../middleware/authUser.js'
+import ResourceNotFoundError from '../exceptions/ResourceNotFound.js'
+
 
 const debug = createDebug('giftr:routes:people')
 const router = express.Router()
@@ -31,26 +33,35 @@ router.post('/', sanitizeBody, async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res, next) => {
     try {
         const person = await Person.findById(req.params.id)
-        if (!person) throw new Error('Resource not found')
+        if (!person) throw new ResourceNotFoundError('Resource not found')
             res.send({ data: person })
     } catch (err) {
-        sendResourceNotFound(req, res)
+        next(err)
     }
 })
 
-function sendResourceNotFound(req, res) {
-    res.status(404).send({
-        error: [
-            {
-            status: '404',
-            title: 'Resource does nto exist',
-            description: `We could not find a person with id: ${req.params.id}`,
-            },
-        ],
-    })
+const update = (overwrite = false) => async (req, res, next) => {
+    try {
+        const person = await Person.findByIdAndUpdate(
+        req.params.id,
+        req.sanitizedBody,
+        {
+            new: true,
+            overwrite,
+            runValidators: true,
+        }
+    )
+        if (!person) throw new ResourceNotFoundError('Resource not found')
+            res.send({ data: person })
+    } catch (err) {
+        next(err)  
+    }
 }
+
+router.put('/:id', sanitizeBody, update(true))
+
 
 export default router;
