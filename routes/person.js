@@ -62,6 +62,8 @@ const update = (overwrite = false) => async (req, res, next) => {
 }
 
 router.put('/:id', sanitizeBody, update(true))
+router.patch('/:id', sanitizeBody, update(false))
+
 
 
 export default router;
