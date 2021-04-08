@@ -31,7 +31,7 @@ export default function (req, res, next) {
   }
 
   try {
-    const payload = jwt.verify(token, jwtConfig.secretKey, { algorithms: ['HS256'] });
+    const payload = jwt.verify(token, `${jwtConfig.secretKey}`, { algorithms: ['HS256'] });
 
     req.user = { _id: payload.uid };
     next();

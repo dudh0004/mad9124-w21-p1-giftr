@@ -1,11 +1,12 @@
 import express from 'express';
 import User from '../../models/User.js';
+import sanitizeBody from '../../middleware/sanitizeBody.js';
 import authUser from '../../middleware/authUser.js';
 
 const router = express.Router();
 
-router.post('/users', async (req, res, next) => {
-  new User(req.body)
+router.post('/users', sanitizeBody, async (req, res, next) => {
+  new User(req.sanitizedBody)
     .save()
     .then(newUser => res.status(201).send({ data: newUser }))
     .catch(next);
@@ -17,22 +18,19 @@ router.get('/users/me', authUser, async (req, res) => {
   res.send({ data: user });
 });
 
-const update = (overwrite = false) => async (req, res) => {
-  console.log(req.body);
-
+router.patch('/users/me', authUser, sanitizeBody, async (req, res, next) => {
   try {
-    req.body.password = await User.updatePassword(req.body.password);
+    const user = await User.findById(req.user._id);
+    const password = await User.updatePassword(req.sanitizedBody.password);
+
+    Object.assign(req.sanitizedBody, { password });
 
     const document = await User.findByIdAndUpdate(
-
-      // FIXME: find id
-      // req.params.id,
-      '606d08468f52043524970248',
-
-      req.body,
+      user._id,
+      req.sanitizedBody,
       {
         new: true,
-        overwrite,
+        overwrite: false,
         runValidators: true
       }
     );
@@ -43,12 +41,10 @@ const update = (overwrite = false) => async (req, res) => {
   } catch (error) {
     sendResourceNotFound(req, res);
   }
-};
+});
 
-router.patch('/users/me', update(false));
-
-router.post('/tokens', async (req, res) => {
-  const { email, password } = req.body;
+router.post('/tokens', sanitizeBody, async (req, res) => {
+  const { email, password } = req.sanitizedBody;
   const authenticatedUser = await User.authenticate(email, password);
 
   if (!authenticatedUser) {
@@ -73,7 +69,7 @@ function sendResourceNotFound(req, res) {
       {
         status: '404',
         title: 'Resource does not exist',
-        description: `We could not find a person with id: ${req.params.id}`,
+        description: `We could not find a person with this id`,
       }
     ]
   })
