@@ -1,0 +1,11 @@
+{
+  "name": "Giftr",
+  "db": {
+    "host": "localhost",
+    "port": "27017",
+    "name": "giftr"
+  },
+  "jwt": {
+    "saltRounds": 14
+  }
+}
