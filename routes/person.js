@@ -31,4 +31,26 @@ router.post('/', sanitizeBody, async (req, res) => {
     }
 })
 
+router.get('/:id', async (req, res) => {
+    try {
+        const person = await Person.findById(req.params.id)
+        if (!person) throw new Error('Resource not found')
+            res.send({ data: person })
+    } catch (err) {
+        sendResourceNotFound(req, res)
+    }
+})
+
+function sendResourceNotFound(req, res) {
+    res.status(404).send({
+        error: [
+            {
+            status: '404',
+            title: 'Resource does nto exist',
+            description: `We could not find a person with id: ${req.params.id}`,
+            },
+        ],
+    })
+}
+
 export default router;
