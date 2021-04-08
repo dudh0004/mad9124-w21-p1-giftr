@@ -4,6 +4,7 @@ import sanitizeMongo from 'express-mongo-sanitize';
 import connectDB from './startup/connectDB.js';
 import logger from './startup/logger.js';
 import authRouter from './routes/auth/index.js';
+import personRouter from './routes/person.js'
 
 connectDB();
 
@@ -20,5 +21,6 @@ app.use(sanitizeMongo());
 
 // routes
 app.use('/auth', authRouter);
+app.use('/api/person', personRouter);
 
 export default app;
