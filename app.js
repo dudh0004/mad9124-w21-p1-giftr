@@ -5,6 +5,7 @@ import connectDB from './startup/connectDB.js';
 import logger from './startup/logger.js';
 import authRouter from './routes/auth/index.js';
 import personRouter from './routes/person.js';
+import giftRouter from './routes/gift.js';
 import handleErrors from './middleware/handleErrors.js';
 import logErrors from './middleware/logErrors.js';
 
@@ -25,6 +26,7 @@ app.use(sanitizeMongo());
 // routes
 app.use('/auth', authRouter);
 app.use('/api/person', personRouter);
+app.use('/api/people', giftRouter);
 
 // error handlers
 app.use(logErrors)
