@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const Gift = new Schema({ type: String });
+const Gift = new mongoose.Schema({ type: String });
 
 const schema = new mongoose.Schema({
     name: { type: String, trim: true, maxlength: 254, required: true },
