@@ -2,6 +2,8 @@ import express from 'express';
 import User from '../../models/User.js';
 import sanitizeBody from '../../middleware/sanitizeBody.js';
 import authUser from '../../middleware/authUser.js';
+import ResourceNotFoundError from '../../exceptions/ResourceNotFound.js';
+
 
 const router = express.Router();
 
@@ -35,11 +37,11 @@ router.patch('/users/me', authUser, sanitizeBody, async (req, res, next) => {
       }
     );
 
-    if (!document) throw new Error('Resource not found');
+    if (!document) throw new ResourceNotFoundError('Resource not found');
 
     res.send({ data: document });
   } catch (error) {
-    sendResourceNotFound(req, res);
+    next(error);
   }
 });
 
@@ -63,16 +65,5 @@ router.post('/tokens', sanitizeBody, async (req, res) => {
     .send({ data: { token: authenticatedUser.generateAuthToken() } });
 });
 
-function sendResourceNotFound(req, res) {
-  res.status(404).send({
-    error: [
-      {
-        status: '404',
-        title: 'Resource does not exist',
-        description: `We could not find a person with this id`,
-      }
-    ]
-  })
-}
 
 export default router;
