@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
     gifts: [{ type: mongoose.Schema.Types.ObjectId , ref: 'Gift' }],
     imageUrl: { type: String, trim: true, maxlength: 1024 }
 }, {
-    timestamps: true
+    timestamps: { type: Date, default: Date.now()},
 });
 
 schema.methods.toJSON = function () {
