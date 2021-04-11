@@ -8,7 +8,7 @@ import ResourceNotFoundError from '../exceptions/ResourceNotFound.js';
 
 const router = express.Router();
 
-router.post('/:id/gifts', sanitizeBody, async (req, res, next) => {
+router.post('/:id/gifts', authUser, sanitizeBody, async (req, res, next) => {
   try {
     const newGift = new Gift(req.sanitizedBody);
 
@@ -60,7 +60,8 @@ const updateGiftId = (toDelete = false) => async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
+
 router.patch('/:id/gifts/:giftId', authUser, sanitizeBody, updateGiftId(false));
 router.delete('/:id/gifts/:giftId', authUser, sanitizeBody, updateGiftId(true));
 
