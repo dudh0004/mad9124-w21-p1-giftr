@@ -9,7 +9,6 @@ import giftRouter from './routes/gift.js';
 import handleErrors from './middleware/handleErrors.js';
 import logErrors from './middleware/logErrors.js';
 
-
 connectDB();
 
 const log = logger.child({ module: 'expressApp' });
@@ -25,12 +24,11 @@ app.use(sanitizeMongo());
 
 // routes
 app.use('/auth', authRouter);
-app.use('/api/person', personRouter);
+app.use('/api/people', personRouter);
 app.use('/api/people', giftRouter);
 
 // error handlers
 app.use(logErrors)
 app.use(handleErrors)
-
 
 export default app;
