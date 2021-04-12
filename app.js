@@ -28,7 +28,8 @@ app.use(
         "preflightContinue": false,
         "optionsSuccessStatus": 204
     })
-)
+);
+app.get('/', (req, res) => res.send({ data: { healthStatus: 'UP' } }));
 app.use(compression());
 app.use(helmet());
 app.use(morgan('tiny'));
