@@ -29,12 +29,12 @@ const updateGiftId = (toDelete = false) => async (req, res, next) => {
     let person = await Person.findById(req.params.id);
     
     if (String(user._id) !== String(person.owner)) {
-      throw new Error('Sorry, you are not Authorized to change this gift.');
+      throw new ResourceNotFoundError('Sorry, you are not Authorized to change this gift.');
     }
     
     const hasGifts = person.gifts.filter(gift => String(gift) === String(req.params.giftId));
 
-    if (!hasGifts.length) throw new Error(`Sorry, this person don't have this gift.`);
+    if (!hasGifts.length) throw new ResourceNotFoundError(`Sorry, this person don't have this gift.`);
 
     const document = !toDelete
       ? await Gift.findByIdAndUpdate(
