@@ -10,12 +10,12 @@ import ResourceNotFoundError from '../exceptions/ResourceNotFound.js'
 const debug = createDebug('giftr:routes:people')
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/', authUser, async (req, res) => {
     const person = await Person.find()
     res.send({ data: person })
 })
 
-router.post('/', sanitizeBody, async (req, res) => {
+router.post('/', authUser, sanitizeBody, async (req, res) => {
     let newPerson = new Person(req.sanitizedBody)
     try {
         await newPerson.save()
@@ -34,7 +34,7 @@ router.post('/', sanitizeBody, async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', authUser, async (req, res, next) => {
     try {
         const person = await Person.findById(req.params.id).populate('owner')
         if (!person) throw new ResourceNotFoundError('Resource not found')
@@ -62,8 +62,8 @@ const update = (overwrite = false) => async (req, res, next) => {
     }
 }
 
-router.put('/:id', sanitizeBody, update(true))
-router.patch('/:id', sanitizeBody, update(false))
+router.put('/:id', authUser, sanitizeBody, update(true))
+router.patch('/:id', authUser, sanitizeBody, update(false))
 
 
 router.delete('/:id', authUser, async (req, res, next) => {
@@ -85,5 +85,6 @@ router.delete('/:id', authUser, async (req, res, next) => {
     } catch (err) {
         next(err)
     }
-})
+});
+
 export default router;
