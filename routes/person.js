@@ -10,9 +10,14 @@ import ResourceNotFoundError from '../exceptions/ResourceNotFound.js'
 const debug = createDebug('giftr:routes:people')
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/' ,authUser ,async (req, res) => {
     const person = await Person.find()
-    res.send({ data: person })
+    const user  = await User.findById(req.user._id);
+
+    const result = person.filter(item => {
+        return String(item.owner) === String(req.user._id)
+    })
+    res.send({ data: result })
 })
 
 router.post('/', sanitizeBody, async (req, res) => {
