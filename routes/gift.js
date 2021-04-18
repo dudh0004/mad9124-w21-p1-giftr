@@ -8,6 +8,20 @@ import ResourceNotFoundError from '../exceptions/ResourceNotFound.js';
 
 const router = express.Router();
 
+router.get('/:id/gifts', authUser, async (req, res) => {
+  const person = await Person.findById(req.params.id);
+  let list = [];
+
+  person.gifts.forEach(async (gift, index) => {
+    const personGift = await Gift.findById(gift);
+    list.push(personGift);
+
+    if (index === person.gifts.length - 1) {
+      res.send({ data: list });
+    }
+  });
+});
+
 router.post('/:id/gifts', authUser, sanitizeBody, async (req, res, next) => {
   try {
     const newGift = new Gift(req.sanitizedBody);

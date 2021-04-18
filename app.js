@@ -28,13 +28,14 @@ app.use(
         "preflightContinue": false,
         "optionsSuccessStatus": 204
     })
-)
+);
 app.use(compression());
 app.use(helmet());
 app.use(morgan('tiny'));
 app.use(express.static('public'));
 app.use(express.json());
 app.use(sanitizeMongo());
+app.get('/', (req, res) => res.send({ data: { healthStatus: 'UP' } }));
 
 // routes
 app.use('/auth', authRouter);
