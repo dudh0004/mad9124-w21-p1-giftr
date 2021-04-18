@@ -12,6 +12,12 @@ const router = express.Router()
 
 router.get('/', authUser, async (req, res) => {
     const person = await Person.find()
+
+
+    // TODO:
+    // check the x-api-key in the header and return the data
+
+
     res.send({ data: person })
 })
 

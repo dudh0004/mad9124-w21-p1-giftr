@@ -892,3 +892,113 @@
 {"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
 {"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
 {"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"stage","level":"warn","service":"giftrApp"}
+{"level":"info","message":"Express is listening on port 3030 ..."}
+{"module":"connectDB","message":"Connected to MongoDB @ w21-final-giftr...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"info","service":"giftrApp"}
+{"module":"expressApp","message":"development","level":"warn","service":"giftrApp"}
+{"module":"connectDB","message":"Successfully connected to MongoDB ...","level":"info","service":"giftrApp"}
