@@ -10,18 +10,17 @@ import ResourceNotFoundError from '../exceptions/ResourceNotFound.js'
 const debug = createDebug('giftr:routes:people')
 const router = express.Router()
 
-router.get('/', authUser, async (req, res) => {
+router.get('/' ,authUser ,async (req, res) => {
     const person = await Person.find()
+    const user  = await User.findById(req.user._id);
 
-
-    // TODO:
-    // check the x-api-key in the header and return the data
-
-
-    res.send({ data: person })
+    const result = person.filter(item => {
+        return String(item.owner) === String(req.user._id)
+    })
+    res.send({ data: result })
 })
 
-router.post('/', authUser, sanitizeBody, async (req, res) => {
+router.post('/', sanitizeBody , authUser, async (req, res) => {
     let newPerson = new Person(req.sanitizedBody)
     try {
         await newPerson.save()
@@ -68,8 +67,8 @@ const update = (overwrite = false) => async (req, res, next) => {
     }
 }
 
-router.put('/:id', authUser, sanitizeBody, update(true))
-router.patch('/:id', authUser, sanitizeBody, update(false))
+router.put('/:id', sanitizeBody, authUser, update(true))
+router.patch('/:id', sanitizeBody, authUser, update(false))
 
 
 router.delete('/:id', authUser, async (req, res, next) => {
