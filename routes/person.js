@@ -90,5 +90,6 @@ router.delete('/:id', authUser, async (req, res, next) => {
     } catch (err) {
         next(err)
     }
-})
+});
+
 export default router;
