@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "API_JWTKEY=xzk12x7ag6vyph380o4hwa89yc1f55 nodemon server.js",
-    "stage": "NODE_ENV=stage API_JWTKEY=xzk12x7ag6vyph380o4hwa89yc1f55 nodemon server.js",
+    "dev": "nodemon server.js",
+    "stage": "NODE_ENV=stage nodemon server.js",
     "start": "NODE_ENV=development DEBUG=giftr* nodemon server.js"
   },
   "keywords": [

@@ -2,6 +2,7 @@ import config from 'config'
 import jwt from 'jsonwebtoken'
 
 const jwtConfig = config.get('jwt')
+const apiKey = config.get('apiKey')
 const parseToken = function (headerValue) {
   if (headerValue) {
     const [type, token] = headerValue.split(' ')
@@ -16,15 +17,18 @@ const parseToken = function (headerValue) {
 
 export default function (req, res, next) {
   const headerValue = req.header('Authorization')
+  const headerApiKey = req.header('x-api-key')
   const token = parseToken(headerValue)
 
-  if (!token) {
+  if (!token || headerApiKey !== apiKey) {
+    let errorMessage = !token ? 'Bearer token' : 'API Key';
+
     return res.status(401).send({
       errors: [
         {
           status: '401',
           title: 'Authentication failed',
-          description: 'Missing Bearer token',
+          description: `Missing ${errorMessage}`,
         },
       ],
     })

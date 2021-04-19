@@ -5,5 +5,6 @@
   },
   "jwt": {
     "secretKey": "APP_JWTKEY"
-  }
+  },
+  "apiKey": "APP_APIKEY"
 }
