@@ -1,9 +1,12 @@
 {
   "name": "Giftr",
   "db": {
+    "scheme": "mongodb",
     "host": "localhost",
     "port": "27017",
-    "name": "giftr"
+    "name": "giftr",
+    "authSource": "test",
+    "credentials": ""
   },
   "jwt": {
     "saltRounds": 14
