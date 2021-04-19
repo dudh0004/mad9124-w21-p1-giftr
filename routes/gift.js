@@ -1,99 +1,104 @@
-import express from 'express';
-import authUser from '../middleware/authUser.js';
-import sanitizeBody from '../middleware/sanitizeBody.js';
-import User from '../models/User.js';
-import Person from '../models/Person.js';
-import Gift from '../models/Gift.js';
-import ResourceNotFoundError from '../exceptions/ResourceNotFound.js';
+import express from 'express'
+import authUser from '../middleware/authUser.js'
+import sanitizeBody from '../middleware/sanitizeBody.js'
+import User from '../models/User.js'
+import Person from '../models/Person.js'
+import Gift from '../models/Gift.js'
+import ResourceNotFoundError from '../exceptions/ResourceNotFound.js'
 
-const router = express.Router();
+const router = express.Router()
 
 router.get('/:id/gifts', authUser, async (req, res, next) => {
   try {
-    const userId = req.header('x-api-key');
+    const userId = req.header('x-api-key')
 
-		if (String(req.user._id) !== String(userId)) {
-			throw new ResourceNotFoundError('You are not Authorized.');
-		}
+    if (String(req.user._id) !== String(userId)) {
+      throw new ResourceNotFoundError('You are not Authorized.')
+    }
 
-    const person = await Person.findById(req.params.id);
+    const person = await Person.findById(req.params.id)
     const gifts = await Promise.all(
-      person.gifts.map(async gift => await Gift.findById(gift))
-    );
+      person.gifts.map(async (gift) => await Gift.findById(gift))
+    )
 
-    res.send({ data: gifts });
+    res.send({ data: gifts })
   } catch (error) {
-    next(error);
+    next(error)
   }
-});
+})
 
 router.post('/:id/gifts', authUser, sanitizeBody, async (req, res, next) => {
   try {
-    const userId = req.header('x-api-key');
+    const userId = req.header('x-api-key')
 
-		if (String(req.user._id) !== String(userId)) {
-			throw new ResourceNotFoundError('You are not Authorized.');
-		}
+    if (String(req.user._id) !== String(userId)) {
+      throw new ResourceNotFoundError('You are not Authorized.')
+    }
 
-    const newGift = new Gift(req.sanitizedBody);
+    const newGift = new Gift(req.sanitizedBody)
 
-    await newGift.save();
+    await newGift.save()
     await Person.findOneAndUpdate(
       { _id: req.params.id },
-      { $push: { gifts: newGift }
-    });
-    res.status(201).send({ data: newGift });
+      { $push: { gifts: newGift } }
+    )
+    res.status(201).send({ data: newGift })
   } catch (error) {
-    next(error);
+    next(error)
   }
-});
+})
 
 const updateGiftId = (toDelete = false) => async (req, res, next) => {
   try {
-    const userId = req.header('x-api-key');
+    const userId = req.header('x-api-key')
 
-		if (String(req.user._id) !== String(userId)) {
-			throw new ResourceNotFoundError('You are not Authorized.');
-		}
-
-    const user = await User.findById(req.user._id);
-    let person = await Person.findById(req.params.id);
-    
-    if (String(user._id) !== String(person.owner)) {
-      throw new ResourceNotFoundError('Sorry, you are not Authorized to change this gift.');
+    if (String(req.user._id) !== String(userId)) {
+      throw new ResourceNotFoundError('You are not Authorized.')
     }
-    
-    const hasGifts = person.gifts.filter(gift => String(gift) === String(req.params.giftId));
 
-    if (!hasGifts.length) throw new ResourceNotFoundError(`Sorry, this person don't have this gift.`);
+    const user = await User.findById(req.user._id)
+    let person = await Person.findById(req.params.id)
+
+    if (String(user._id) !== String(person.owner)) {
+      throw new ResourceNotFoundError(
+        'Sorry, you are not Authorized to change this gift.'
+      )
+    }
+
+    const hasGifts = person.gifts.filter(
+      (gift) => String(gift) === String(req.params.giftId)
+    )
+
+    if (!hasGifts.length)
+      throw new ResourceNotFoundError(
+        `Sorry, this person don't have this gift.`
+      )
 
     const document = !toDelete
-      ? await Gift.findByIdAndUpdate(
-          req.params.giftId,
-          req.sanitizedBody,
-          {
-            new: true,
-            overwrite: false,
-            runValidators: true
-          }
-        )
-      : await Gift.findByIdAndRemove(req.params.giftId);
+      ? await Gift.findByIdAndUpdate(req.params.giftId, req.sanitizedBody, {
+          new: true,
+          overwrite: false,
+          runValidators: true,
+        })
+      : await Gift.findByIdAndRemove(req.params.giftId)
 
-    if (!document) throw new ResourceNotFoundError('Resource not found');
+    if (!document) throw new ResourceNotFoundError('Resource not found')
 
     if (toDelete) {
-      person.gifts = person.gifts.filter(gift => String(gift) !== String(req.params.giftId));
+      person.gifts = person.gifts.filter(
+        (gift) => String(gift) !== String(req.params.giftId)
+      )
     }
 
-    person.markModified('gifts');
-    person.save();
-    res.send({ data: document });
+    person.markModified('gifts')
+    person.save()
+    res.send({ data: document })
   } catch (error) {
-    next(error);
+    next(error)
   }
-};
+}
 
-router.patch('/:id/gifts/:giftId', authUser, sanitizeBody, updateGiftId(false));
-router.delete('/:id/gifts/:giftId', authUser, sanitizeBody, updateGiftId(true));
+router.patch('/:id/gifts/:giftId', authUser, sanitizeBody, updateGiftId(false))
+router.delete('/:id/gifts/:giftId', authUser, sanitizeBody, updateGiftId(true))
 
-export default router;
+export default router

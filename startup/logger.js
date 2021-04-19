@@ -1,4 +1,4 @@
-import winston from 'winston';
+import winston from 'winston'
 
 const logger = winston.createLogger({
   level: 'info',
@@ -6,9 +6,9 @@ const logger = winston.createLogger({
   defaultMeta: { service: 'giftrApp' },
   transports: [
     new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'logs/combined.log' })
-  ]
-});
+    new winston.transports.File({ filename: 'logs/combined.log' }),
+  ],
+})
 
 if (process.env.NODE_ENV !== 'production') {
   logger.add(
@@ -16,9 +16,9 @@ if (process.env.NODE_ENV !== 'production') {
       format: winston.format.combine(
         winston.format.colorize(),
         winston.format.simple()
-      )
+      ),
     })
-  );
+  )
 }
 
-export default logger;
+export default logger

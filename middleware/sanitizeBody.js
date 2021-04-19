@@ -1,38 +1,38 @@
-import xss from 'xss';
+import xss from 'xss'
 
-const sanitize = sourceString => {
+const sanitize = (sourceString) => {
   return xss(sourceString, {
     whiteList: [],
     stripIgnoreTag: true,
-    stripIgnoreTagBody: ['script']
-  });
-};
+    stripIgnoreTagBody: ['script'],
+  })
+}
 
-const stripTags = payload => {
-  const attributes = { ...payload };
+const stripTags = (payload) => {
+  const attributes = { ...payload }
 
   for (let key in attributes) {
     if (attributes[key] instanceof Array) {
-      attributes[key] = attributes[key].map(element => {
+      attributes[key] = attributes[key].map((element) => {
         if (typeof element === 'string') {
-          return sanitize(element);
+          return sanitize(element)
         } else {
-          return stripTags(element);
+          return stripTags(element)
         }
-      });
+      })
     } else if (attributes[key] instanceof Object) {
-      attributes[key] = stripTags(attributes[key]);
+      attributes[key] = stripTags(attributes[key])
     } else {
-      attributes[key] = sanitize(attributes[key]);
+      attributes[key] = sanitize(attributes[key])
     }
   }
 
-  return attributes;
-};
+  return attributes
+}
 
 export default function sanitizeBodyMiddleware(req, res, next) {
-  const { id, _id, ...attributes } = req.body;
+  const { id, _id, ...attributes } = req.body
 
-  req.sanitizedBody = stripTags(attributes);
-  next();
-};
+  req.sanitizedBody = stripTags(attributes)
+  next()
+}
