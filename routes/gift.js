@@ -10,12 +10,6 @@ const router = express.Router()
 
 router.get('/:id/gifts', authUser, async (req, res, next) => {
   try {
-    const userId = req.header('x-api-key')
-
-    if (String(req.user._id) !== String(userId)) {
-      throw new ResourceNotFoundError('You are not Authorized.')
-    }
-
     const person = await Person.findById(req.params.id)
     const gifts = await Promise.all(
       person.gifts.map(async (gift) => await Gift.findById(gift))
@@ -29,12 +23,6 @@ router.get('/:id/gifts', authUser, async (req, res, next) => {
 
 router.post('/:id/gifts', authUser, sanitizeBody, async (req, res, next) => {
   try {
-    const userId = req.header('x-api-key')
-
-    if (String(req.user._id) !== String(userId)) {
-      throw new ResourceNotFoundError('You are not Authorized.')
-    }
-
     const newGift = new Gift(req.sanitizedBody)
 
     await newGift.save()
@@ -50,12 +38,6 @@ router.post('/:id/gifts', authUser, sanitizeBody, async (req, res, next) => {
 
 const updateGiftId = (toDelete = false) => async (req, res, next) => {
   try {
-    const userId = req.header('x-api-key')
-
-    if (String(req.user._id) !== String(userId)) {
-      throw new ResourceNotFoundError('You are not Authorized.')
-    }
-
     const user = await User.findById(req.user._id)
     let person = await Person.findById(req.params.id)
 

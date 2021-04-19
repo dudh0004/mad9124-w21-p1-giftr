@@ -11,15 +11,9 @@ const router = express.Router()
 
 router.get('/', authUser, async (req, res, next) => {
   try {
-    const userId = req.header('x-api-key')
-
-    if (String(req.user._id) !== String(userId)) {
-      throw new ResourceNotFoundError('You are not Authorized.')
-    }
-
     const people = await Person.find()
     const result = people.filter(
-      (person) => String(person.owner) === String(userId)
+      (person) => String(person.owner) === String(req.user._id)
     )
 
     res.send({ data: result })
@@ -30,12 +24,6 @@ router.get('/', authUser, async (req, res, next) => {
 
 router.post('/', sanitizeBody, authUser, async (req, res) => {
   try {
-    const userId = req.header('x-api-key')
-
-    if (String(req.user._id) !== String(userId)) {
-      throw new ResourceNotFoundError('You are not Authorized.')
-    }
-
     let newPerson = new Person(req.sanitizedBody)
 
     await newPerson.save()
@@ -56,12 +44,7 @@ router.post('/', sanitizeBody, authUser, async (req, res) => {
 
 router.get('/:id', authUser, async (req, res, next) => {
   try {
-    const userId = req.header('x-api-key')
     const person = await Person.findById(req.params.id).populate('owner')
-
-    if (String(person.owner._id) !== String(userId)) {
-      throw new ResourceNotFoundError('You are not Authorized.')
-    }
 
     if (!person) {
       throw new ResourceNotFoundError('Resource not found')
@@ -75,12 +58,6 @@ router.get('/:id', authUser, async (req, res, next) => {
 
 const update = (overwrite = false) => async (req, res, next) => {
   try {
-    const userId = req.header('x-api-key')
-
-    if (String(req.user._id) !== String(userId)) {
-      throw new ResourceNotFoundError('You are not Authorized.')
-    }
-
     const person = await Person.findByIdAndUpdate(
       req.params.id,
       req.sanitizedBody,
@@ -104,11 +81,10 @@ router.patch('/:id', sanitizeBody, authUser, update(false))
 
 router.delete('/:id', authUser, async (req, res, next) => {
   try {
-    const userId = req.header('x-api-key')
     const person = await Person.findById(req.params.id)
     const user = await User.findById(req.user._id)
 
-    if (!user || String(person.owner) !== String(userId)) {
+    if (!user) {
       throw new ResourceNotFoundError('You are not Authorized.')
     }
 
