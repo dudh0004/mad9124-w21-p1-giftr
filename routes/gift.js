@@ -8,22 +8,33 @@ import ResourceNotFoundError from '../exceptions/ResourceNotFound.js';
 
 const router = express.Router();
 
-router.get('/:id/gifts', authUser, async (req, res) => {
-  const person = await Person.findById(req.params.id);
-  let list = [];
+router.get('/:id/gifts', authUser, async (req, res, next) => {
+  try {
+    const userId = req.header('x-api-key');
 
-  person.gifts.forEach(async (gift, index) => {
-    const personGift = await Gift.findById(gift);
-    list.push(personGift);
+		if (String(req.user._id) !== String(userId)) {
+			throw new ResourceNotFoundError('You are not Authorized.');
+		}
 
-    if (index === person.gifts.length - 1) {
-      res.send({ data: list });
-    }
-  });
+    const person = await Person.findById(req.params.id);
+    const gifts = await Promise.all(
+      person.gifts.map(async gift => await Gift.findById(gift))
+    );
+
+    res.send({ data: gifts });
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.post('/:id/gifts', authUser, sanitizeBody, async (req, res, next) => {
   try {
+    const userId = req.header('x-api-key');
+
+		if (String(req.user._id) !== String(userId)) {
+			throw new ResourceNotFoundError('You are not Authorized.');
+		}
+
     const newGift = new Gift(req.sanitizedBody);
 
     await newGift.save();
@@ -39,6 +50,12 @@ router.post('/:id/gifts', authUser, sanitizeBody, async (req, res, next) => {
 
 const updateGiftId = (toDelete = false) => async (req, res, next) => {
   try {
+    const userId = req.header('x-api-key');
+
+		if (String(req.user._id) !== String(userId)) {
+			throw new ResourceNotFoundError('You are not Authorized.');
+		}
+
     const user = await User.findById(req.user._id);
     let person = await Person.findById(req.params.id);
     

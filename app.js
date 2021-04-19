@@ -12,7 +12,6 @@ import giftRouter from './routes/gift.js';
 import handleErrors from './middleware/handleErrors.js';
 import logErrors from './middleware/logErrors.js';
 
-
 connectDB();
 
 const log = logger.child({ module: 'expressApp' });
@@ -21,14 +20,7 @@ const app = express();
 log.info(process.env.NODE_ENV);
 log.warn(app.get('env'));
 
-app.use(
-    cors({
-        "origin": "*",
-        "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-        "preflightContinue": false,
-        "optionsSuccessStatus": 204
-    })
-);
+app.use(cors());
 app.use(compression());
 app.use(helmet());
 app.use(morgan('tiny'));
@@ -43,7 +35,7 @@ app.use('/api/people', personRouter);
 app.use('/api/people', giftRouter);
 
 // error handlers
-app.use(logErrors)
-app.use(handleErrors)
+app.use(logErrors);
+app.use(handleErrors);
 
 export default app;
