@@ -18,8 +18,8 @@ services:
     # depends_on:
     #   - mongo
     environment:
-      API_JWTKEY: xzk12x7ag6vyph380o4hwa89yc1f55
       API_APIKEY: dudh0004
+      API_JWTKEY: xzk12x7ag6vyph380o4hwa89yc1f55
       API_PORT: 80
       NODE_ENV: 'stage'
     ports:
