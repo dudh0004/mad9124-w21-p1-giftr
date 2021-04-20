@@ -10,5 +10,6 @@
   },
   "jwt": {
     "saltRounds": 14
-  }
+  },
+  "apiKey": "giftr"
 }
