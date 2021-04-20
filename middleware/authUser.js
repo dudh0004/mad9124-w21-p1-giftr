@@ -20,7 +20,7 @@ export default function (req, res, next) {
   const headerApiKey = req.header('x-api-key')
   const token = parseToken(headerValue)
 
-  if (!token || headerApiKey !== apiKey) {
+  if (!token || (headerApiKey !== apiKey)) {
     let errorMessage = !token ? 'Bearer token' : 'API Key';
 
     return res.status(401).send({

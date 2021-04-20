@@ -22,7 +22,7 @@ router.get('/', authUser, async (req, res, next) => {
   }
 })
 
-router.post('/', sanitizeBody, authUser, async (req, res) => {
+router.post('/', authUser, sanitizeBody, async (req, res) => {
   try {
     let newPerson = new Person(req.sanitizedBody)
 
